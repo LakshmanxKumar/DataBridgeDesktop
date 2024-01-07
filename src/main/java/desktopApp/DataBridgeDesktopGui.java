@@ -78,7 +78,7 @@ public class DataBridgeDesktopGui {
 				if(e.getStateChange()==ItemEvent.SELECTED) {
 					myrun.setAllowTimer(true);
 					alive.start();
-					System.out.println("ALIVE active");
+					System.out.println("Alive button active");
 				}else if(e.getStateChange()==ItemEvent.DESELECTED) {
 					myrun.setAllowTimer(false);
 					

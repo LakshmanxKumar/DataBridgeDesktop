@@ -10,14 +10,16 @@ public class ModernFonts {
 	
 	public static Font loadFont(String fontFileName, float size) {
 		size=size==0?defaultSize:size;
-		String  path = System.getProperty("user.dir")+"/src/main/java/modernfonts/fontCollection/"+fontFileName+".ttf";
+//		String  path = System.getProperty("user.dir")+"/src/main/java/modernfonts/fontCollection/"+fontFileName+".ttf";
+		String  path = "src/main/java/modernfonts/fontCollection/"+fontFileName+".ttf";
 		File font = new File(path);
-		Font myFont = null;
+		Font myFont = new Font("Arial", Font.BOLD, 14);
 		try {
 			myFont = Font.createFont(Font.TRUETYPE_FONT, font);
 		} catch (FontFormatException | IOException e) {
 			e.printStackTrace();
 		}
+
 		return  myFont.deriveFont(size);
 	}
 		

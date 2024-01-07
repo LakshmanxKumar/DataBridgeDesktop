@@ -35,20 +35,23 @@ public class Calls {
 	
 	
 	
-	public static void makePingRequest() {
+	public static String makePingRequest() {
 	Request pingRequest = new Request.Builder()
 			.url(BASE_API+"/ping")
 			.get()
 			.build();
-	
+        String res="";
 	try {
 	Response pingResponse = client.newCall(pingRequest).execute();
-	System.out.println(pingResponse.body().string());
-	pingResponse.close();
+
+        res=pingResponse.body().string();
+//	    System.out.println(res);
+	    pingResponse.close();
+        return res;
 	}catch(Exception e) 
 	{ System.out.println("Unable to connect with API!"+e.getMessage());}
 	
-	
+	return res;
 	}	
 	
 	
