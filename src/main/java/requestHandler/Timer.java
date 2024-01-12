@@ -1,8 +1,15 @@
 package requestHandler;
 
+import desktopApp.RoundButton;
+
+import java.awt.*;
+
 public class Timer implements Runnable{
 	// this class takes care of the keep api alive button
-	
+	RoundButton element=null;
+	public Timer(RoundButton element){
+		this.element=element;
+	}
 	public volatile boolean allowTimer=true;
 	public void setAllowTimer(boolean x) {allowTimer=x;}
 	
@@ -18,6 +25,9 @@ public class Timer implements Runnable{
 
 			}
 		}
+		if(ans.equals("Api is alive")){
+			element.setBackground(new Color(53, 240, 122));
+		}else{element.setBackground(Color.RED);}
 		System.out.println(ans);
 		int tries=1;
 		while(allowTimer) {

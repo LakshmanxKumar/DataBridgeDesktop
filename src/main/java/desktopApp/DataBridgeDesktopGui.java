@@ -53,6 +53,23 @@ public class DataBridgeDesktopGui {
         dropPanel.add(text,constraints);
         DnDTransferHandler dropHandler= new DnDTransferHandler(text);
         dropPanel.setTransferHandler(dropHandler);
+
+
+		RoundButton checkStatus = new RoundButton("");
+		checkStatus.setBounds(170,36,36,10);
+		checkStatus.setBorderPainted(false);
+		checkStatus.setFocusPainted(false);
+		checkStatus.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String res=Calls.makePingRequest();
+				if(res.equals("Api is alive")){
+					checkStatus.setBackground(Color.GREEN);
+				}else{
+					checkStatus.setBackground(Color.RED);
+				}
+			}
+		});
         
                
         JCheckBox aliveBox = new JCheckBox("Keep api alive");
@@ -62,7 +79,7 @@ public class DataBridgeDesktopGui {
         aliveBox.setFont(ModernFonts.loadFont("OpenSans-SemiBold",13));
         aliveBox.setBackground(frameColor);
         aliveBox.addItemListener(new ItemListener() {
-        	Timer myrun= new Timer();
+        	Timer myrun= new Timer(checkStatus);
         	
 			@Override
 			public void itemStateChanged(ItemEvent e) {
@@ -157,27 +174,28 @@ public class DataBridgeDesktopGui {
 		        
 		        List<List<String>> data= Calls.getFileList();
 		        
-//				for(String i:arr) {
-		        for(List<String> i :data) {
-		        	
-					JButton item = new JButton(i.get(0));
-					item.addActionListener(new ActionListener() {
+				if(data!=null) {
+					for (List<String> i : data) {
 
-						@Override
-						public void actionPerformed(ActionEvent e) {
-							System.out.println(item.getText());
-							selectedFile=item.getText();
-						}
-						
-					});
-					item.setFont(ModernFonts.loadFont("OpenSans-SemiBold", 15));
-					item.setBackground(null);
-					item.setFocusable(false);
-					item.setForeground(frameColor);
-					item.setBorderPainted(false);
-					
-					listPanel.add(item);
-					
+						JButton item = new JButton(i.get(0));
+						item.addActionListener(new ActionListener() {
+
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								System.out.println(item.getText());
+								selectedFile = item.getText();
+							}
+
+						});
+						item.setFont(ModernFonts.loadFont("OpenSans-SemiBold", 15));
+						item.setBackground(null);
+						item.setFocusable(false);
+						item.setForeground(frameColor);
+						item.setBorderPainted(false);
+
+						listPanel.add(item);
+
+					}
 				}
 				
 				frame.add(scrollPane);
@@ -211,7 +229,9 @@ public class DataBridgeDesktopGui {
         	
         });
 
-               
+
+
+        frame.add(checkStatus);
         frame.add(listFiles);
         frame.add(dropPanel);
         frame.add(upload);
@@ -221,7 +241,7 @@ public class DataBridgeDesktopGui {
 //        frame.add(search);
 //        frame.add(searchButton);
         
-		
+
 		frame.setVisible(true);
 	}
 	

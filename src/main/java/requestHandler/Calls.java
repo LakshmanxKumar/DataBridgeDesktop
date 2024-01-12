@@ -23,8 +23,6 @@ import okhttp3.ResponseBody;
 public class Calls {
 	static String BASE_API="https://databridge.onrender.com";
 	static OkHttpClient client = new OkHttpClient();
-	
-	
 	 private static String getMediaType(String fileName) {
 	        String fileExtension = fileName.substring(fileName.lastIndexOf('.') + 1);
 	        FileNameMap fileNameMap = URLConnection.getFileNameMap();
