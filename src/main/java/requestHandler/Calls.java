@@ -130,7 +130,7 @@ public class Calls {
 
         RequestBody requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
-                .addFormDataPart("file", fileToUpload.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), fileToUpload))
+                .addFormDataPart("file", fileToUpload.getName(), RequestBody.create(MediaType.parse("application/octet-stream"), fileToUpload))
                 .build();
 
         Request uploadRequest = new Request.Builder()
